@@ -36,3 +36,21 @@
     transform: rotate(360deg);
   }
 }
+
+.app {
+  display: grid;
+  width: 90%;
+  margin: auto;
+}
+
+.app__pref {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 50px;
+  margin-top: 50px;
+}
+
+.pref-name {
+  font-size: 20px;
+  cursor: pointer;
+}

@@ -4,6 +4,7 @@ import HighchartsReact from 'highcharts-react-official'
 import Highcharts from 'highcharts'
 import resas from './api/resas'
 import getPref from './api/getPref'
+import './App.css'
 
 const App = () => {
   const [seriesTmp, setSeriesTmp] = useState([])
@@ -122,27 +123,27 @@ const App = () => {
     }
   }
 
-  const containerStyle = { width: '90%', margin: 'auto', display: 'grid' }
-  const appStyle = { display: 'flex', flexWrap: 'wrap', marginBottom: '50px', marginTop: '50px' }
-
   return (
-    <div style={containerStyle}>
-      <div style={appStyle}>
+    <div className="app">
+      <div className="app__pref">
         {prefs.map(pref => (
           <div key={pref.prefCode} style={{ width: '12%' }}>
             <input
+              id={pref.prefCode}
               key={pref.prefCode}
               type="checkbox"
               name={pref.prefName}
               value={pref.prefCode}
               onChange={handleCheckbox}
             />
-            <span style={{ fontSize: '20px' }}>{pref.prefName}</span>
+            <label className="pref-name" htmlFor={pref.prefCode}>
+              {pref.prefName}
+            </label>
           </div>
         ))}
       </div>
 
-      {/* <HighchartsReact highcharts={Highcharts} options={options} /> */}
+      <HighchartsReact highcharts={Highcharts} options={options} />
     </div>
   )
 }
