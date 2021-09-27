@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from 'react'
 import HighchartsReact from 'highcharts-react-official'
 import Highcharts from 'highcharts'
-import _ from 'lodash'
 import resas from './api/resas'
 
 const App = () => {
