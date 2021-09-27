@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 import HighchartsReact from 'highcharts-react-official'
 import Highcharts from 'highcharts'
 import resas from './api/resas'
+import getPref from './api/getPref'
 
 const App = () => {
   const [seriesTmp, setSeriesTmp] = useState([])
@@ -79,7 +80,7 @@ const App = () => {
 
   // get pref in Japan
   useEffect(async () => {
-    const response = await resas.get('/prefectures')
+    const response = await getPref
 
     const prefRes = []
     const data = response.data.result
@@ -109,6 +110,7 @@ const App = () => {
           cityCode: '-'
         }
       })
+      // const response = await getPopu(e.target.value)
       const population = response.data.result.data[0].data
       const prefItem = { name: e.target.name, data: [] }
 
@@ -120,9 +122,12 @@ const App = () => {
     }
   }
 
+  const containerStyle = { width: '90%', margin: 'auto', display: 'grid' }
+  const appStyle = { display: 'flex', flexWrap: 'wrap', marginBottom: '50px', marginTop: '50px' }
+
   return (
-    <div style={{ width: '90%', margin: 'auto', display: 'grid' }}>
-      <div style={{ display: 'flex', flexWrap: 'wrap', marginBottom: '50px', marginTop: '50px' }}>
+    <div style={containerStyle}>
+      <div style={appStyle}>
         {prefs.map(pref => (
           <div key={pref.prefCode} style={{ width: '12%' }}>
             <input
