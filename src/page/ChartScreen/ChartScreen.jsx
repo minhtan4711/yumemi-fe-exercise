@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState, useEffect } from 'react'
 import Chart from '../../components/chart'
+import LoadingScreen from '../LoadingScreen/LoadingScreen'
 import resas from '../../api/resas'
 import getPref from '../../api/getPref'
 import './ChartScreen.css'
@@ -8,6 +9,7 @@ import './ChartScreen.css'
 const ChartScreen = () => {
   const [seriesTmp, setSeriesTmp] = useState([])
   const [prefs, setPref] = useState([])
+  const [completed, setCompleted] = useState(undefined)
 
   const options = {
     chart: {
@@ -89,6 +91,9 @@ const ChartScreen = () => {
     })
 
     setPref(prefRes)
+    setTimeout(() => {
+      setCompleted(true)
+    }, 1000)
   }, [])
 
   const handleCheckbox = async e => {
@@ -123,27 +128,33 @@ const ChartScreen = () => {
   }
 
   return (
-    <div className="container">
-      <div className="container__pref">
-        {prefs.map(pref => (
-          <div key={pref.prefCode} style={{ width: '12%' }}>
-            <input
-              id={pref.prefCode}
-              key={pref.prefCode}
-              type="checkbox"
-              name={pref.prefName}
-              value={pref.prefCode}
-              onChange={handleCheckbox}
-            />
-            <label className="container__pref-name" htmlFor={pref.prefCode}>
-              {pref.prefName}
-            </label>
+    <div>
+      {!completed ? (
+        <LoadingScreen />
+      ) : (
+        <div className="container">
+          <div className="container__pref">
+            {prefs.map(pref => (
+              <div key={pref.prefCode} style={{ width: '12%' }}>
+                <input
+                  id={pref.prefCode}
+                  key={pref.prefCode}
+                  type="checkbox"
+                  name={pref.prefName}
+                  value={pref.prefCode}
+                  onChange={handleCheckbox}
+                />
+                <label className="container__pref-name" htmlFor={pref.prefCode}>
+                  {pref.prefName}
+                </label>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
-      <div className="container__chart">
-        <Chart data={options} />
-      </div>
+          <div className="container__chart">
+            <Chart data={options} />
+          </div>
+        </div>
+      )}
     </div>
   )
 }
