@@ -1,0 +1,32 @@
+/* // .app {
+//   display: grid;
+//   width: 90%;
+//   margin: auto;
+//   &__pref {
+//     display: flex;
+//     flex-wrap: wrap;
+//     width: 100%;
+//     margin: 50px auto 50px auto;
+//     &-name {
+//       font-size: 20px;
+//       cursor: pointer;
+//     }
+//   }
+// } */
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  margin: 50px auto;
+}
+.container__pref {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-end;
+  gap: 5px;
+  width: 100%;
+  margin-bottom: 50px;
+}
+.container__pref-name {
+  font-size: 20px;
+}
